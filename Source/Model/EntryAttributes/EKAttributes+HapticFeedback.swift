@@ -17,6 +17,8 @@ public extension EKAttributes {
         case error
         case none
         
+        // MARZIPAN: Haptic Feedback is not available on macOS
+        #if os(iOS) && !MARZIPAN
         @available(iOS 10.0, *)
         var value: UINotificationFeedbackGenerator.FeedbackType? {
             switch self {
@@ -30,6 +32,7 @@ public extension EKAttributes {
                 return nil
             }
         }
+        #endif
         
         var isValid: Bool {
             return self != .none
